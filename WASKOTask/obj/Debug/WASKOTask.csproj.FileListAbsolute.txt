@@ -1,0 +1,7 @@
+D:\Programowanko\WASKOTask\WASKOTask\bin\Debug\WASKOTask.exe.config
+D:\Programowanko\WASKOTask\WASKOTask\bin\Debug\WASKOTask.exe
+D:\Programowanko\WASKOTask\WASKOTask\bin\Debug\WASKOTask.pdb
+D:\Programowanko\WASKOTask\WASKOTask\obj\Debug\WASKOTask.csprojAssemblyReference.cache
+D:\Programowanko\WASKOTask\WASKOTask\obj\Debug\WASKOTask.csproj.CoreCompileInputs.cache
+D:\Programowanko\WASKOTask\WASKOTask\obj\Debug\WASKOTask.exe
+D:\Programowanko\WASKOTask\WASKOTask\obj\Debug\WASKOTask.pdb
