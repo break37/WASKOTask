@@ -5,3 +5,10 @@ D:\Programowanko\WASKOTask\WASKOTask\obj\Debug\WASKOTask.csprojAssemblyReference
 D:\Programowanko\WASKOTask\WASKOTask\obj\Debug\WASKOTask.csproj.CoreCompileInputs.cache
 D:\Programowanko\WASKOTask\WASKOTask\obj\Debug\WASKOTask.exe
 D:\Programowanko\WASKOTask\WASKOTask\obj\Debug\WASKOTask.pdb
+D:\Programowanko\WASKOTask\WASKOTask\bin\Debug\MySql.Data.dll
+D:\Programowanko\WASKOTask\WASKOTask\bin\Debug\Google.Protobuf.dll
+D:\Programowanko\WASKOTask\WASKOTask\bin\Debug\BouncyCastle.Crypto.dll
+D:\Programowanko\WASKOTask\WASKOTask\bin\Debug\MySql.Data.xml
+D:\Programowanko\WASKOTask\WASKOTask\obj\Debug\WASKOTask.DAL.ConnectionParameters.resources
+D:\Programowanko\WASKOTask\WASKOTask\obj\Debug\WASKOTask.csproj.GenerateResource.cache
+D:\Programowanko\WASKOTask\WASKOTask\obj\Debug\WASKOTask.csproj.CopyComplete
