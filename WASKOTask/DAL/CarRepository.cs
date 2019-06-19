@@ -36,20 +36,19 @@ namespace WASKOTask.DAL
                 MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder();
                 //create command, and add records to database
             }
-
+            carsBuffer.Clear();
             File.WriteAllText(path, fileContent);
         }
         #endregion
 
         #region Display functions
-        public void ShowAllRecords()
+        public List<Car> GetAllRecords()
         {
             List<Car> carsToShow = new List<Car>();
 
             using (MySqlConnection connection = DBConnection.Instance.Connection)
             {
                 connection.Open();
-
                 MySqlCommand command = new MySqlCommand(SELECT_ALL_CARS, connection);
                 MySqlDataReader reader = command.ExecuteReader();
 
@@ -59,13 +58,9 @@ namespace WASKOTask.DAL
                 }
 
                 connection.Close();
-
-                Console.WriteLine(String.Format("{0, -15} {1, -15} {2, -4}", "Producent", "Model", "Pojemność"));
-                foreach (Car car in carsToShow)
-                {
-                    Console.Write(car.ToString());
-                }
             }
+
+            return carsToShow;
         }
         #endregion
     }

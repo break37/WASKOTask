@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using WASKOTask.DAL;
+using System.Globalization;
 
 namespace WASKOTask
 {
@@ -26,40 +27,37 @@ namespace WASKOTask
                 //show all records
                 if (oper == '1')
                 {
-                    cars.ShowAllRecords();
-                    Console.WriteLine();
+
+                    Console.WriteLine(String.Format("{0, -15} {1, -15} {2, -4}", "Producent", "Model", "Pojemność"));
+                    foreach (Car car in cars.GetAllRecords())
+                    {
+                        Console.Write(car.ToString());
+                    }
                     cars.SaveRecords(@"C:\Users\Hubert\Desktop\cars.txt");
                 }
                 //add a new record
                 else if (oper == '2')
                 {
-                    //int controlSum = 0;
+                    Console.WriteLine("Dodawanie nowego rekordu\n");
 
-                    Console.WriteLine("Dodawanie nowego rekordu");
-                    Console.WriteLine();
-
-                    //Console.Write("Podaj producenta: ");
-                    //string manufacturer = Console.ReadLine();
-                    //if (IsValidManu(manufacturer))
-                    //{
-                    //    controlSum++;
-                    //}
-
-                    //Console.Write("Podaj model: ");
-                    //string model = Console.ReadLine();
-                    //if (IsValidManu(model))
-                    //{
-                    //    controlSum++;
-                    //}
-
-                    //Console.Write("Podaj producenta: ");
-                    //double capacity = Convert.ToDouble(Console.ReadLine());   
+                    Console.Write("Podaj producenta: ");
+                    string manufacturer = Console.ReadLine();
+                    Console.Write("Podaj model: ");
+                    string model = Console.ReadLine();
+                    Console.Write("Podaj pojemnosc: ");
+                    string capacity = Console.ReadLine();
                     
+                    //validate all attributes
+                    if (CarValidator.isManufacturerValid(manufacturer) && CarValidator.isModelValid(model) && CarValidator.isCapacityValid(capacity))
+                    {
+                        cars.AddRecord(new Car(manufacturer, model, Convert.ToDouble(capacity.Replace(".",","), new CultureInfo("pl-PL"))));
+                        Console.WriteLine("Rekord dodany do bufora.");
+                    }
+                    else Console.WriteLine("Nie mozna dodac rekordu. Nie wszystkie dane sa poprawne.");
                 }
                 //exit
                 else if (oper == '3')
                 {
-                    Console.WriteLine("Wybrano wyjście");
                     continue;
                 }
                 //show non-existing option prompt
@@ -67,23 +65,9 @@ namespace WASKOTask
                 {
                     Console.WriteLine("Wybrano nieistniejącą opcję");
                 }
+
+                Console.WriteLine("\n");
             }
         }
-
-        private static bool IsValidManu(string manufacturer)
-        {
-            //if first letter is capital
-            if (manufacturer[0] >= 65 && manufacturer[0] <= 90)
-                if (!manufacturer.Contains(" "))
-                    return true;
-            return false;
-        }
-
-        private static bool IsValidModel(string model)
-        {
-            //check model validity
-            return false;
-        }
-
     }
 }

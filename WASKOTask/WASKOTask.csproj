@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Car.cs" />
+    <Compile Include="CarValidator.cs" />
     <Compile Include="DAL\CarRepository.cs" />
     <Compile Include="DAL\ConnectionParameters.Designer.cs">
       <AutoGen>True</AutoGen>
