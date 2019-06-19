@@ -15,6 +15,8 @@ namespace WASKOTask
         public double Capacity { get; set; }
         #endregion
 
+        public Car() { }
+
         public Car(string manufacturer, string model, double capacity)
         {
             Manufacturer = manufacturer;
@@ -29,6 +31,13 @@ namespace WASKOTask
             Capacity = Convert.ToDouble(reader["capacity"]);
         }
         
+        public bool isReadyToAdd()
+        {
+            if (String.IsNullOrEmpty(Manufacturer) && String.IsNullOrEmpty(Model) && Capacity != null)
+                return true;
+            return false;
+        }
+
         public override string ToString()
         {
             return String.Format("{0, -15} {1, -15} {2, -4}\n", Manufacturer, Model, Math.Round(Capacity, 1));
