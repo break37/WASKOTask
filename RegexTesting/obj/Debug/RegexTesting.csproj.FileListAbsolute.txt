@@ -1,0 +1,7 @@
+D:\Programowanko\WASKOTask\RegexTesting\bin\Debug\RegexTesting.exe.config
+D:\Programowanko\WASKOTask\RegexTesting\bin\Debug\RegexTesting.exe
+D:\Programowanko\WASKOTask\RegexTesting\bin\Debug\RegexTesting.pdb
+D:\Programowanko\WASKOTask\RegexTesting\obj\Debug\RegexTesting.csprojAssemblyReference.cache
+D:\Programowanko\WASKOTask\RegexTesting\obj\Debug\RegexTesting.csproj.CoreCompileInputs.cache
+D:\Programowanko\WASKOTask\RegexTesting\obj\Debug\RegexTesting.exe
+D:\Programowanko\WASKOTask\RegexTesting\obj\Debug\RegexTesting.pdb
