@@ -22,12 +22,11 @@ namespace WASKOTask
             {
                 Console.Write("Podaj operacje (1 - lista, 2 - dodawanie, 3 – wyjscie): ");
                 oper = Console.ReadKey().KeyChar;
-                Console.WriteLine("\n");
+                Console.WriteLine();
 
                 //show all records
                 if (oper == '1')
                 {
-
                     Console.WriteLine(String.Format("{0, -15} {1, -15} {2, -4}", "Producent", "Model", "Pojemność"));
                     foreach (Car car in cars.GetAllRecords())
                     {
@@ -37,7 +36,7 @@ namespace WASKOTask
                 //add a new record
                 else if (oper == '2')
                 {
-                    Console.WriteLine("Dodawanie nowego rekordu\n");
+                    Console.WriteLine("Dodawanie nowego rekordu");
 
                     Console.Write("Podaj producenta: ");
                     string manufacturer = Console.ReadLine();
@@ -57,6 +56,7 @@ namespace WASKOTask
                 //exit
                 else if (oper == '3')
                 {
+                    cars.SaveRecords();
                     continue;
                 }
                 //show non-existing option prompt
@@ -65,7 +65,7 @@ namespace WASKOTask
                     Console.WriteLine("Wybrano nieistniejącą opcję");
                 }
 
-                Console.WriteLine("\n");
+                Console.WriteLine();
             }
         }
     }

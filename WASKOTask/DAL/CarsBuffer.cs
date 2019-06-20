@@ -10,6 +10,11 @@ namespace WASKOTask.DAL
     {
         public List<Car> Cars { get; set; }
 
+        public CarsBuffer()
+        {
+            Cars = new List<Car>();
+        }
+
         public void AddRecord(Car car)
         {
             Cars.Add(car);
