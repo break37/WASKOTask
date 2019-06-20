@@ -14,34 +14,43 @@ namespace WASKOTask.DAL
         private const string SELECT_ALL_CARS = "SELECT * FROM cars";
         #endregion
 
-        private List<Car> carsBuffer;
+        private CarsBuffer buffer;
         
         public CarRepository()
         {
-            carsBuffer = new List<Car>();
+            buffer = new CarsBuffer();
+            StartAutoAdd();
         }
 
-        #region Functional functions
-        public void AddRecord(Car car)
+        #region Functions
+
+        public void AddToBuffer(Car car)
         {
-            carsBuffer.Add(car);
+            buffer.AddRecord(car);
         }
 
-        public void SaveRecords(string path)
+        public void SaveRecords()
         {
-            string fileContent = "";
-
-            foreach (Car car in carsBuffer)
+            foreach (Car car in buffer.Cars)
             {
-                MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder();
-                //create command, and add records to database
+                using (MySqlConnection connection = DBConnection.Instance.Connection)
+                {
+                    connection.Open();
+                    using (MySqlCommand command = new MySqlCommand())
+                    {
+                        command.Connection = connection;
+                        command.CommandText = "INSERT INTO cars (manufacturer, model, capacity) VALUES (@manu, @model, @capa)";
+                        command.Parameters.Add(new MySqlParameter("@manu", car.Manufacturer));
+                        command.Parameters.Add(new MySqlParameter("@model", car.Model));
+                        command.Parameters.Add(new MySqlParameter("@capa", car.Capacity));
+                        command.ExecuteNonQuery();
+                    }
+                    connection.Close();
+                }
             }
-            carsBuffer.Clear();
-            File.WriteAllText(path, fileContent);
+            buffer.Clear();
         }
-        #endregion
 
-        #region Display functions
         public List<Car> GetAllRecords()
         {
             List<Car> carsToShow = new List<Car>();
@@ -59,8 +68,26 @@ namespace WASKOTask.DAL
 
                 connection.Close();
             }
-
             return carsToShow;
+        }
+
+        private void StartAutoAdd()
+        {
+            Task saveBuffer = new Task(
+                new Action(() =>
+                {
+                    for (; ; )
+                    {
+                        if (!buffer.IsEmpty())
+                        {
+                            SaveRecords();
+                            buffer.Clear();
+                            System.Threading.Thread.Sleep(30000);
+                        }
+                    }
+                })
+            );
+            saveBuffer.Start(); 
         }
         #endregion
     }

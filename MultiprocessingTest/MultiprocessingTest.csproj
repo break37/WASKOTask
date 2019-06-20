@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{809EA51F-0687-4588-ACFE-1BA116DFEC42}</ProjectGuid>
+    <ProjectGuid>{4D97B82F-97C2-4378-B9D2-CCC2113189FA}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>WASKOTask</RootNamespace>
-    <AssemblyName>WASKOTask</AssemblyName>
+    <RootNamespace>MultiprocessingTest</RootNamespace>
+    <AssemblyName>MultiprocessingTest</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,7 +33,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data, Version=8.0.16.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,27 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Car.cs" />
-    <Compile Include="CarValidator.cs" />
-    <Compile Include="DAL\CarRepository.cs" />
-    <Compile Include="DAL\CarsBuffer.cs" />
-    <Compile Include="DAL\ConnectionParameters.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ConnectionParameters.resx</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\DBConnection.cs" />
-    <Compile Include="DatabaseManager.cs" />
+    <Compile Include="Multiprocessing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="DAL\ConnectionParameters.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ConnectionParameters.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

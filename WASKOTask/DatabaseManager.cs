@@ -9,7 +9,7 @@ using System.Globalization;
 
 namespace WASKOTask
 {
-    class Program
+    class DatabaseManager
     {
         static void Main(string[] args)
         {
@@ -33,7 +33,6 @@ namespace WASKOTask
                     {
                         Console.Write(car.ToString());
                     }
-                    cars.SaveRecords(@"C:\Users\Hubert\Desktop\cars.txt");
                 }
                 //add a new record
                 else if (oper == '2')
@@ -50,7 +49,7 @@ namespace WASKOTask
                     //validate all attributes
                     if (CarValidator.isManufacturerValid(manufacturer) && CarValidator.isModelValid(model) && CarValidator.isCapacityValid(capacity))
                     {
-                        cars.AddRecord(new Car(manufacturer, model, Convert.ToDouble(capacity.Replace(".",","), new CultureInfo("pl-PL"))));
+                        cars.AddToBuffer(new Car(manufacturer, model, Convert.ToDouble(capacity.Replace(".",","), new CultureInfo("pl-PL"))));
                         Console.WriteLine("Rekord dodany do bufora.");
                     }
                     else Console.WriteLine("Nie mozna dodac rekordu. Nie wszystkie dane sa poprawne.");

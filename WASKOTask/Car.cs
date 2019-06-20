@@ -33,7 +33,7 @@ namespace WASKOTask
         
         public bool isReadyToAdd()
         {
-            if (String.IsNullOrEmpty(Manufacturer) && String.IsNullOrEmpty(Model) && Capacity != null)
+            if (!String.IsNullOrEmpty(Manufacturer) && !String.IsNullOrEmpty(Model) && !Double.IsNaN(Capacity))
                 return true;
             return false;
         }
