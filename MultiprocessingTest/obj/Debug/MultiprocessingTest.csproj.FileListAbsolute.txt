@@ -1,7 +1,0 @@
-D:\Programowanko\WASKOTask\MultiprocessingTest\bin\Debug\MultiprocessingTest.exe.config
-D:\Programowanko\WASKOTask\MultiprocessingTest\bin\Debug\MultiprocessingTest.exe
-D:\Programowanko\WASKOTask\MultiprocessingTest\bin\Debug\MultiprocessingTest.pdb
-D:\Programowanko\WASKOTask\MultiprocessingTest\obj\Debug\MultiprocessingTest.csprojAssemblyReference.cache
-D:\Programowanko\WASKOTask\MultiprocessingTest\obj\Debug\MultiprocessingTest.csproj.CoreCompileInputs.cache
-D:\Programowanko\WASKOTask\MultiprocessingTest\obj\Debug\MultiprocessingTest.exe
-D:\Programowanko\WASKOTask\MultiprocessingTest\obj\Debug\MultiprocessingTest.pdb
