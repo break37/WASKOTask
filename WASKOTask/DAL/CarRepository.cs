@@ -14,6 +14,11 @@ namespace WASKOTask.DAL
         private const string SELECT_ALL_CARS = "SELECT * FROM cars";
         #endregion
 
+        #region MySQL error messages
+        private const string CONNECTION_REFUSED = "Nie mozna nawiazac polaczenia z baza danych";
+        private const string QUERY_ERROR = "Nie udalo sie wykonac polecenia";
+        #endregion
+
         private CarsBuffer buffer;
         
         public CarRepository()
@@ -23,7 +28,6 @@ namespace WASKOTask.DAL
         }
 
         #region Functions
-
         public void AddToBuffer(Car car)
         {
             buffer.AddRecord(car);
@@ -31,43 +35,61 @@ namespace WASKOTask.DAL
 
         public void SaveRecords()
         {
-            foreach (Car car in buffer.Cars)
+            foreach (Car car in buffer.Cars.ToList()) //ToList() prevent from collection modified
             {
-                using (MySqlConnection connection = DBConnection.Instance.Connection)
-                {
-                    connection.Open();
-                    using (MySqlCommand command = new MySqlCommand())
+                try
+                { 
+                    using (MySqlConnection connection = DBConnection.Instance.Connection)
                     {
-                        command.Connection = connection;
-                        command.CommandText = "INSERT INTO cars (manufacturer, model, capacity) VALUES (@manu, @model, @capa)";
-                        command.Parameters.Add(new MySqlParameter("@manu", car.Manufacturer));
-                        command.Parameters.Add(new MySqlParameter("@model", car.Model));
-                        command.Parameters.Add(new MySqlParameter("@capa", car.Capacity));
-                        command.ExecuteNonQuery();
+                        connection.Open();
+                        using (MySqlCommand command = new MySqlCommand())
+                        {
+                            command.Connection = connection;
+                            command.CommandText = "INSERT INTO cars (manufacturer, model, capacity) VALUES (@manu, @model, @capa)";
+                            command.Parameters.Add(new MySqlParameter("@manu", car.Manufacturer));
+                            command.Parameters.Add(new MySqlParameter("@model", car.Model));
+                            command.Parameters.Add(new MySqlParameter("@capa", car.Capacity));
+                            command.ExecuteNonQuery();
+                        }
+                        connection.Close();
                     }
-                    connection.Close();
+                    buffer.Clear();
+                }
+                catch (MySqlException)
+                {
+                    Console.WriteLine(CONNECTION_REFUSED);
                 }
             }
-            buffer.Clear();
         }
 
         public List<Car> GetAllRecords()
         {
             List<Car> carsToShow = new List<Car>();
-
-            using (MySqlConnection connection = DBConnection.Instance.Connection)
+            try
             {
-                connection.Open();
-                MySqlCommand command = new MySqlCommand(SELECT_ALL_CARS, connection);
-                MySqlDataReader reader = command.ExecuteReader();
-
-                while (reader.Read())
+                using (MySqlConnection connection = DBConnection.Instance.Connection)
                 {
-                    carsToShow.Add(new Car(reader));
-                }
+                    connection.Open();
+                    MySqlCommand command = new MySqlCommand(SELECT_ALL_CARS, connection);
+                    MySqlDataReader reader = command.ExecuteReader();
 
-                connection.Close();
+                    while (reader.Read())
+                    {
+                        carsToShow.Add(new Car(reader));
+                    }
+
+                    connection.Close();
+                }
             }
+            catch (MySqlException)
+            {
+                Console.WriteLine(CONNECTION_REFUSED);
+            }
+            catch (Exception)
+            {
+                Console.WriteLine(QUERY_ERROR);
+            }
+
             return carsToShow;
         }
 
@@ -76,7 +98,7 @@ namespace WASKOTask.DAL
             Task saveBuffer = new Task(
                 new Action(() =>
                 {
-                    for (; ; )
+                    for ( ; ; )
                     {
                         if (!buffer.IsEmpty())
                         {

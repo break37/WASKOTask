@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using System.Globalization;
 
 namespace WASKOTask
 {
@@ -40,7 +41,7 @@ namespace WASKOTask
 
         public override string ToString()
         {
-            return String.Format("{0, -15} {1, -15} {2, -4}\n", Manufacturer, Model, Math.Round(Capacity, 1));
+            return String.Format("{0, -15} {1, -15} {2, -9:0.0##}\n", Manufacturer, Model, Capacity);
         }
     }
 }

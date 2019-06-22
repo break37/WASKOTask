@@ -27,31 +27,12 @@ namespace WASKOTask
                 //show all records
                 if (oper == '1')
                 {
-                    Console.WriteLine(String.Format("{0, -15} {1, -15} {2, -4}", "Producent", "Model", "Pojemność"));
-                    foreach (Car car in cars.GetAllRecords())
-                    {
-                        Console.Write(car.ToString());
-                    }
+                    ShowCars(cars);
                 }
                 //add a new record
                 else if (oper == '2')
                 {
-                    Console.WriteLine("Dodawanie nowego rekordu");
-
-                    Console.Write("Podaj producenta: ");
-                    string manufacturer = Console.ReadLine();
-                    Console.Write("Podaj model: ");
-                    string model = Console.ReadLine();
-                    Console.Write("Podaj pojemnosc: ");
-                    string capacity = Console.ReadLine();
-                    
-                    //validate all attributes
-                    if (CarValidator.isManufacturerValid(manufacturer) && CarValidator.isModelValid(model) && CarValidator.isCapacityValid(capacity))
-                    {
-                        cars.AddToBuffer(new Car(manufacturer, model, Convert.ToDouble(capacity.Replace(".",","), new CultureInfo("pl-PL"))));
-                        Console.WriteLine("Rekord dodany do bufora.");
-                    }
-                    else Console.WriteLine("Nie mozna dodac rekordu. Nie wszystkie dane sa poprawne.");
+                    AddNewRecord(cars);
                 }
                 //exit
                 else if (oper == '3')
@@ -67,6 +48,36 @@ namespace WASKOTask
 
                 Console.WriteLine();
             }
+        }
+
+        private static void ShowCars(CarRepository source)
+        {
+            Console.WriteLine(String.Format("{0, -15} {1, -15} {2, -9}", "Producent", "Model", "Pojemność"));
+            Console.WriteLine("-----------------------------------------");
+            foreach (Car car in source.GetAllRecords())
+            {
+                Console.Write(car.ToString());
+            }
+        }
+
+        private static void AddNewRecord(CarRepository destination)
+        {
+            Console.WriteLine("Dodawanie nowego rekordu");
+
+            Console.Write("Podaj producenta: ");
+            string manufacturer = Console.ReadLine();
+            Console.Write("Podaj model: ");
+            string model = Console.ReadLine();
+            Console.Write("Podaj pojemnosc: ");
+            string capacity = Console.ReadLine();
+
+            //validate all attributes
+            if (CarValidator.IsManufacturerValid(manufacturer) && CarValidator.IsModelValid(model) && CarValidator.IsCapacityValid(capacity))
+            {
+                destination.AddToBuffer(new Car(manufacturer, model, Convert.ToDouble(capacity.Replace(",", "."), new CultureInfo("en-US"))));
+                Console.WriteLine("Rekord dodany do bufora.");
+            }
+            else Console.WriteLine("Nie mozna dodac rekordu. Nie wszystkie dane sa poprawne.");
         }
     }
 }
